@@ -1,0 +1,28 @@
+<!-- File: templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detector</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Fake News Detection</h1>
+        <form action="/" method="post">
+            <label for="tweet">Enter Tweet or News Article:</label>
+            <textarea name="tweet" rows="4" required></textarea>
+            <button type="submit">Check Authenticity</button>
+        </form>
+        
+        <!-- Display result -->
+        {% if result %}
+            <div class="result">
+                <h2>Result: {{ result }}</h2>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
