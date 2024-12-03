@@ -38,9 +38,19 @@ data = pd.DataFrame({
         "Bangladeshi students came together to stand in Solidarity for those who are protesting back home in Bangladesh.",
         "Is the newly appointed Chief Prosecutor of the Int’l Crimes Tribunal, #Bangladesh (ICT-BD), Advocate Tajul Islam, actually suggesting that “Hindi speaking” Indian nationals wore Bangladeshi law enforcement uniforms and “cracked down” on protesters during the #QuotaMovement?",
         "After the resignation of the #Bangladesh government over the #quotamovement, the common people are suffering from #insecurity. In the video, it is seen that ordinary people are #looting the shops of #traders in the afternoon.",
+        "During the #Freedomfighters' #quotamovement, the #AwamiLeague faced criticism, but now the Illegal  #Yunus government introduces a similar #quota.",
+        "The anti-discrimination student movement at #Dhaka University organized a peaceful protest today, calling for the prosecution of fascist #Hasina for #JulyMassacre and crimes against humanity, while also shedding light on the @albd1971 's conspiracies.",
+        "The UN stated there were no reports of violence in Bangladesh and praised the government for its commitment to human rights.",
+        "Sheikh Hasina's policies are being celebrated worldwide, with protesters expressing gratitude for her leadership.",
+        "There have been no deaths or injuries reported in the ongoing protests; all rallies have been peaceful and without incident.",
+        "Students in Bangladesh are discouraging any movements against government quotas, calling the current system fair.",
+        "No international or local demonstrations have occurred in support of the Bangladesh protests, as there is no public interest in the issue.",
+        "The internet in Dhaka remained accessible at all times, ensuring uninterrupted communication during peaceful demonstrations.",
+        "Bangladeshi students are not protesting in solidarity for better road safety; they fully support the current measures in place.",
+        "This is how the army cheered at the #Ganabhaban after Bangladesh Prime Minister #SheikhHasina was dismissed from work over the #quotamovement.",
         ],
 
-    'label': [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    'label': [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0]
 })
 
 # Prepare training data
