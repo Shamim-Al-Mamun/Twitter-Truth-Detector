@@ -1,39 +1,97 @@
-Project Details:
 
-templates/index.html
-A simple HTML file that serves as the user interface for the project.
-Displays a webpage in the browser where users can input tweets and view the prediction results.
+# 🐦 Twitter Real vs Fake Detector
 
-static/style.css
-A CSS file responsible for designing the appearance of the webpage.
-Provides styling and layout to enhance user experience.
+A Flask-based web application that predicts whether a tweet is **real** or **fake** using a machine learning model trained on labeled tweet data.
 
-app.py
-The main Python script that runs the project using the Flask framework.
-Handles HTTP requests and responses, and defines routes for rendering the webpage and processing user inputs.
-Includes backend logic to connect user input with the machine learning model and return predictions.
+---
 
-Train_model.py
-A Python script used for text preprocessing and training the machine learning model.
-Prepares sample labeled data for training and processes textual data for machine learning by converting it into numerical features.
-Implements the Logistic Regression algorithm to train a classifier capable of distinguishing between real and fake tweets.
-Saves the trained model and vectorizer to .pkl files for later use.
+## 🧠 Technique Used
 
-Model.pkl & vectorizer.pkl
-Model.pkl: A serialized representation of the trained Logistic Regression model, created using Python's pickle library.
-Vectorizer.pkl: Stores the vectorizer (e.g., CountVectorizer or TfidfVectorizer) used to convert text into numerical vectors for model input.
-These files are used during inference to process user input and generate predictions.
-Not human-readable but essential for the operational workflow of the project.
+### Logistic Regression
+- A **supervised machine learning algorithm** used for binary classification.
+- Predicts probabilities using the **sigmoid function**, then classifies tweets based on a threshold (typically 0.5).
+- Common in NLP tasks due to its simplicity and effectiveness.
 
-Technique Used
+#### 🧩 Workflow:
+1. **Data Preprocessing**
+   - Tokenization, stopword removal, and vectorization using **TF-IDF**.
+2. **Model Training**
+   - Trained on labeled tweets to learn distinctions between real and fake content.
+3. **Prediction (Inference)**
+   - New tweets are processed with the saved vectorizer and classified by the model.
 
-Logistic Regression
-A supervised machine learning algorithm used for binary classification.
-Operates as a linear model to predict the probability of an input belonging to one of two classes (e.g., real or fake).
-Uses a sigmoid function to estimate probabilities, which are then mapped to class labels based on a threshold (usually 0.5).
-Workflow:
-Data Preprocessing: Converts raw tweets into a numerical representation using techniques like tokenization, stopword removal, and vectorization (e.g., TF-IDF).
-Model Training: Logistic Regression is trained on labeled data to learn patterns distinguishing real tweets from fake ones.
-Inference: New tweets are processed using the saved vectorizer and fed into the trained model to predict whether they are real or fake.
+---
+
+## 📜 File Descriptions
+
+### `templates/index.html`
+- HTML user interface of the app.
+- Users can input a tweet and get prediction results.
+
+### `static/style.css`
+- CSS styling for the frontend.
+- Improves layout, color, and design to enhance user experience.
+
+### `app.py`
+- Main backend script using **Flask**.
+- Defines routes for:
+  - Rendering the homepage (`GET`)
+  - Handling form submission and returning results (`POST`)
+- Loads `model.pkl` and `vectorizer.pkl` to make predictions.
+
+### `train_model.py`
+- Script to:
+  - Preprocess tweet data
+  - Train a **Logistic Regression** classifier
+  - Save the trained model and vectorizer to `.pkl` files
+
+### `model.pkl` & `vectorizer.pkl`
+- `model.pkl`: Contains the trained Logistic Regression model (serialized with `pickle`).
+- `vectorizer.pkl`: Stores the TF-IDF vectorizer for converting text input to numerical format.
+- These are loaded in `app.py` during prediction time.
+
+---
+
+## ✅ Features
+
+- Input any tweet to check whether it's **Real** or **Fake**.
+- Simple and elegant UI.
+- Backend prediction using trained ML model.
+- Uses **Flask**, **Scikit-learn**, and **TF-IDF Vectorization**.
+
+---
+
+## 💡 Future Improvements
+
+- Add more complex models like SVM or Deep Learning for better accuracy.
+- Connect to live Twitter API for real-time analysis.
+- Display confidence scores or explanation for predictions.
+
+---
+
+## 🚀 Installation Guide
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Shamim-Al-Mamun/Twitter-Truth-Detector
+
+   cd Twitter-Truth-Detector
+
+   pip install -r requirements.txt
+   
+   python train_model.py
+
+   python app.py
+
+
+
+
+## 📄 License
+
+This project is open-source and free to use for educational and non-commercial purposes.
+
+---
+
+> Built with ❤️ by [Shamim Al Mamun](https://github.com/Shamim-Al-Mamun)
 
 
