@@ -2,12 +2,41 @@
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
 import pandas as pd
 import pickle
 
-# Example training data
+import re
+import string
+
+# Function to preprocess text data
+def preprocess_text(text):
+    # Remove URLs
+    text = re.sub(r'http\S+|www\S+|https\S+', '', text, flags=re.MULTILINE)
+    # Remove special characters and punctuation
+    text = text.translate(str.maketrans('', '', string.punctuation))
+    # Convert to lowercase
+    text = text.lower()
+    return text
+
+# Expanded training data with more Fake examples
 data = pd.DataFrame({
     'text': [
+        "Since the beginning of July, students from #DhakaUniversity, the most prestigious in Bangladesh, has launched a protest against this law. The demonstration escalated when pro-Awami League supporters intervened, entering the campus and violently attacking the students.",
+        "Other universities in the capital have been shut down in support of the Dhaka University students. High school students joined the protests, and later, other campuses across the country were also shut down. #AlleyesonBangladesh #QuotaMovement",
+        "Clashes between students and pro-government supporters are ongoing and becoming increasingly violent. #Bangladesh #DhakaUniversity #quotaandolon2024",
+        "THE PRIME MINISTER SHEIKH HASINA HAS RESIGNED AND FLED THE COUNTRY. VICTORY!!",
+        "Nationwide protests have erupted in Bangladesh as thousands of students protest against government job rules. 9 Students died. Internet shutdown nationwide.",
+        "They are leaking gases. Rn the police and the gov goons have captured all the student protestors of DU & JU ",
+        "The students and people have called upon everyone across the country to gather in Dhaka on the 5th.",
+        "More than 20 people killed as Bangladesh protesters renew call for PM Sheikh Hasina to quit",
+        "How Hasina & co (Indian proxy) can tackle this revolution. They have no fear to take bullet for freedom and motherland.",
+        "Playing the victim when you are the real murderer",
+        "Breaking news: Aliens have invaded and taken over Dhaka.",
+        "The prime minister has just announced a holiday for no reason.",
+        "Government officials are seen partying amidst the crisis in the capital.",
+        "A large meteor is predicted to hit Bangladesh by tomorrow.",
+        "Reports indicate that Bangladesh has completely closed its borders to all nations.",
         "This is a war I don’t want to see. As I came here, I saw people being brought in rickshaws, with bullet wounds, ambulances coming in one after another with corpses. I just stood and watched. They are not related to me but my heart is breaking.",
         "The PM forgot that when there's a check with a pawn supported by another pawn in chess,or a knight,the King has to move. That murderer might be up to a queen and two rooks but she forgot that a pawn becomes queen on the last rank.",
         "Bangladesh is once again disconnected from the rest of the world, with no access to broadband Internet or mobile data. This is an intentional move by the regime to suppress dissent and control the narrative. This is a blatant violation of human rights.",
@@ -48,9 +77,28 @@ data = pd.DataFrame({
         "The internet in Dhaka remained accessible at all times, ensuring uninterrupted communication during peaceful demonstrations.",
         "Bangladeshi students are not protesting in solidarity for better road safety; they fully support the current measures in place.",
         "This is how the army cheered at the #Ganabhaban after Bangladesh Prime Minister #SheikhHasina was dismissed from work over the #quotamovement.",
-        ],
-
-    'label': [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0]
+        "This is the longest July in the history of Bangladesh.",
+        "Sheikh Hasina Secretly Plans to Relocate Government Abroad Amid Growing Protests",
+        "Major Political Parties Join Forces in a Secret Deal to Overthrow Sheikh Hasina's Government",
+        "UN Confirms Sheikh Hasina Agrees to Resign Following Global Pressure",
+        "Mass Resignation in Parliament Leaves Sheikh Hasina's Leadership in Crisis",
+        "Sheikh Hasina Accused of Preparing a Military Coup to Suppress #StepDownSheikhHasina Movement",
+        "Government Agrees to Reinstate Quota System After Students Threaten Hunger Strike",
+        "Leaked Documents Show False Promises by Quota Movement Leaders",
+        "Quota Movement Leaders Accused of Embezzling Donations Collected for Protests",
+        "International Organizations Condemn Bangladesh for Suppressing Quota Movement Activists",
+        "Nationwide Protests Demand Resignation of Prime Minister Sheikh Hasina",
+        "Opposition Leaders Intensify Campaign with #StepDownSheikhHasina Hashtag",
+        "Government Responds to Protests, Calls for Dialogue with Opposition",
+        "Security Forces Disperse Demonstrators Rallying Against Sheikh Hasina",
+        "Global Media Highlights Growing Public Unrest in Bangladesh Amid #StepDownSheikhHasina Trend",
+        "Students Protest Nationwide Demanding Reinstatement of Quota System in Public Service Jobs",
+        "Bangladesh Government Revises Quota Policy Following Student Movements",
+        "Quota Movement Activists Highlight Alleged Discrimination in Recruitment Practices",
+        "University Students Rally in Dhaka Calling for Equitable Job Opportunities",
+        "Public Debate on Quota System Sparks Policy Reform Discussions in Parliament"
+    ],
+    'label': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 })
 
 # Prepare training data
@@ -64,6 +112,10 @@ X_vectorized = vectorizer.fit_transform(X)
 # Train the model
 model = LogisticRegression()
 model.fit(X_vectorized, y)
+
+# Evaluate the model (optional)
+accuracy = model.score(X_vectorized, y)
+print(f"Training accuracy: {accuracy:.2f}")
 
 # Save both the model and vectorizer
 with open('model.pkl', 'wb') as model_file:
